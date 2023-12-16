@@ -56,3 +56,19 @@ code {
   padding: 30px;
   border-radius: 5px;
 }
+
+.form-component-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user {
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flexbox;
+  justify-content: space-between;
+  align-items: center;
+}

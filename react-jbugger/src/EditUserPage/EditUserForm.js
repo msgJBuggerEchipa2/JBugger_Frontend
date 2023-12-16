@@ -1,28 +1,27 @@
-import React from 'react'
-import { useState } from 'react'
-import { Form } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-const UserForm = () => {
-    /*Câte un useState pentru fiecare atribut
-    al unui utilizator. Ele vor fi setate, indiferent dacă
-    valorile sunt sau nu valide. În schimb se va afișa
-    un mesaj dacă valorile nu sunt valide */
-    const [name, setName] = useState('')
-    const [mobileNumber, setMobileNumber] = useState('')
-    const [email, setEmail] = useState('')
+const EditUserForm = () => {
+  
+  const location = useLocation()
+  const user = location.state.userToUpdate
+  const updateUserFunction = location.state.updateUserFunction
 
-    /*Câte un useState pentru fiecare rol,
-    Așa voi ști ce rol va avea noul utilizator*/
-    const [admRole, setAdmRole] = useState(false)
-    const [pmRole, setPmRole] = useState(false)
-    const [tmRole, setTmRole] = useState(false)
-    const [devRole, setDevRole] = useState(false)
-    const [testRole, setTestRole] = useState(false)
-
+    const [name, setName] = useState(user.name)
+    const [mobileNumber, setMobileNumber] = useState(user.mobileNumber)
+    const [email, setEmail] = useState(user.email)
+    const [admRole, setAdmRole] = useState(user.ADM)
+    const [pmRole, setPmRole] = useState(user.PM)
+    const [tmRole, setTmRole] = useState(user.TM)
+    const [devRole, setDevRole] = useState(user.DEV)
+    const [testRole, setTestRole] = useState(user.TEST)
 
   return (
     <div className="container">
-    <form className='add-user-form' method='post' action='/inspectUsers'>
+    <form className='add-user-form' onSubmit={(event) => {
+      event.preventDefault();
+      updateUserFunction(user);
+    }}>
         <div className='form-component'>
             <label>
                 Name
@@ -98,10 +97,10 @@ const UserForm = () => {
             onChange={(event) => setTestRole(event.currentTarget.checked)}/>
         </div>
 
-        <input className='form-component btn btn-block' type='submit' value='Create user'/>
+        <input className='form-component btn btn-block' type='submit' value='Update User'/>
     </form>
     </div>
   )
 }
 
-export default UserForm
+export default EditUserForm
