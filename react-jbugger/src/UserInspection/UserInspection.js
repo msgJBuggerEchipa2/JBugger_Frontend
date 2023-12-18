@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserCard from './UserCard'
 
 const UserInspection = () => {
@@ -17,43 +17,14 @@ const UserInspection = () => {
             } : currentUser))
     }*/}
 
-    /*A list of hardcoded users */
-    const [users, setUsers] = useState([
-        {
-            name : 'Alan B',
-            mobileNumber : '00',
-            email : 'alan@msggroup.com',
-            username : 'alan',
-            ADM : true,
-            PM : true,
-            TM : false,
-            DEV : false,
-            TEST : false
+    const [users, setUsers] = useState([])
 
-        },
-        {
-            name : 'Wake B',
-            mobileNumber : '00',
-            email : 'wake@msggroup.com',
-            username : 'wake',
-            ADM : false,
-            PM : false,
-            TM : true,
-            DEV : false,
-            TEST : false
-        },
-        {
-            name : 'Super B',
-            mobileNumber : '00',
-            email : 'super@msggroup.com',
-            username : 'super',
-            ADM : false,
-            PM : false,
-            TM : false,
-            DEV : true,
-            TEST : true
-        },
-    ])
+    useEffect(() => {
+        fetch('/api/inspectUsers')
+            .then(res => res.json())
+            .then(data => setUsers(data.users))
+    }, [])
+
   return (
     <div className='container'>
         {/*Loops through every user and creates an UserCard */}
