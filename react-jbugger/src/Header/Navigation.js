@@ -1,8 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Perform logout logic (clear authentication state, etc.)
+    onLogout();
+    // Redirect to login page after logout
+    navigate('/login');
+  };
   return (
     <nav>
       <ul className='horizontal-list'>
@@ -11,6 +19,9 @@ const Navigation = () => {
         </li>
         <li>
           <Link to="/inspectUsers">Inspect Users</Link>
+        </li>
+        <li>
+          <button onClick={handleLogout}>Logout</button>
         </li>
       </ul>
     </nav>
