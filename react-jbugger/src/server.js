@@ -10,6 +10,7 @@ export function makeServer({ environment = "test" } = {}) {
 
     seeds(server) {
       server.create("user", {
+        idUser : 1,
         name : 'Alan Baker',
         mobileNumber : '00',
         email : 'alanb@msggroup.com',
@@ -23,6 +24,7 @@ export function makeServer({ environment = "test" } = {}) {
     })
       server.create("user",
       {
+          idUser : 2,
           name : 'Wake Brook',
           mobileNumber : '00',
           email : 'wakeb@msggroup.com',
@@ -35,6 +37,7 @@ export function makeServer({ environment = "test" } = {}) {
       })
       server.create("user",
       {
+        idUser : 3,
           name : 'Super Brother',
           mobileNumber : '00',
           email : 'superbrt@msggroup.com',
@@ -53,6 +56,17 @@ export function makeServer({ environment = "test" } = {}) {
       this.get("/inspectUsers", (schema) => {
         return schema.users.all()
       })
+
+      this.get("inspectUsers/:username", (schema, request) => {
+        const usernameToLookFor = request.params.username
+        return schema.users.findBy({username: usernameToLookFor})
+      })
+
+      this.post('createUser', (schema, request) => {
+        console.log(request)
+        const attributes = JSON.parse(request.requestBody);
+        return schema.users.create(attributes);
+      });
     },
   })
 

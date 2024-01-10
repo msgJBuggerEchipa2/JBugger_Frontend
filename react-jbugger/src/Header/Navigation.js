@@ -1,19 +1,25 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink, Outlet } from 'react-router-dom';
 import './Navigation.css';
 
 const Navigation = () => {
   return (
-    <nav>
+    <div>
+      <nav>
       <ul className='horizontal-list'>
         <li>
-          <Link to="/createUser">Create User</Link>
+          <NavLink to="createUser">Create User</NavLink>
         </li>
         <li>
-          <Link to="/inspectUsers">Inspect Users</Link>
+          <NavLink to="inspectUsers">Inspect Users</NavLink>
         </li>
       </ul>
-    </nav>
+      </nav>
+      <main>
+        <Outlet />
+      </main>
+    </div>
+    
   )
 }
 

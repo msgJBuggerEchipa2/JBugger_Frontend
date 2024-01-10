@@ -1,11 +1,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
-const UserCard = ({ user, onUserUpdate }) => {
-  
-  const navigate = useNavigate()
+const UserCard = ({ user }) => {
 
   return (
     <div className='userCard'>
@@ -19,14 +17,14 @@ const UserCard = ({ user, onUserUpdate }) => {
             color='red'
             style={{cursor : 'pointer', marginLeft: '10px'}}
           />
-          <FontAwesomeIcon 
-            icon={faGear}
-            color='green'
-            style={{cursor : 'pointer', marginLeft: '10px'}}
-            onClick={(event) => {
-            navigate('/editUser', {state : {userToUpdate : user, updateUserFunction : onUserUpdate}})
-            }} 
-          />
+          <NavLink to={`${user.username}`}>
+            <FontAwesomeIcon 
+              icon={faGear}
+              color='green'
+              style={{cursor : 'pointer', marginLeft: '10px'}} 
+            />
+          </NavLink>
+          
         </div>
       </div>
       {/*A list of roles will be printed;*/}

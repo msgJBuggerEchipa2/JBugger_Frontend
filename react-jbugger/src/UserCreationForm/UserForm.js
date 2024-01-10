@@ -1,67 +1,28 @@
 import React from 'react'
-import { useState } from 'react'
-import { Form } from 'react-router-dom'
+import { Form, Navigate, redirect } from 'react-router-dom'
 
 const UserForm = () => {
-    /*Câte un useState pentru fiecare atribut
-    al unui utilizator. Ele vor fi setate, indiferent dacă
-    valorile sunt sau nu valide. În schimb se va afișa
-    un mesaj dacă valorile nu sunt valide */
-    const [name, setName] = useState('')
-    const [mobileNumber, setMobileNumber] = useState('')
-    const [email, setEmail] = useState('')
-
-    /*Câte un useState pentru fiecare rol,
-    Așa voi ști ce rol va avea noul utilizator*/
-    const [admRole, setAdmRole] = useState(false)
-    const [pmRole, setPmRole] = useState(false)
-    const [tmRole, setTmRole] = useState(false)
-    const [devRole, setDevRole] = useState(false)
-    const [testRole, setTestRole] = useState(false)
-
 
   return (
     <div className="container">
-    <form className='add-user-form' method='post' action='/inspectUsers'>
+    <Form className='add-user-form' method='post'>
         <div className='form-component'>
             <label>
                 Name
             </label>
-            <input type='text' placeholder='First name and Last name'
-            value={name}
-            onChange={(event) => {
-                setName(event.target.value)
-            }} />
+            <input name='name' type='text' placeholder='First name and Last name' />
         </div>
         <div className='form-component'>
             <label>
                 Mobile number
             </label>
-            <input type='tel' placeholder='+40 or +49 prefix allowed'
-            value={mobileNumber}
-            onChange={(event) => {
-                setMobileNumber(event.target.value)
-            }}
-            />
-            {/*Some paragraphs showing error messages*/}
-            {mobileNumber && (!mobileNumber.startsWith("+40") && !mobileNumber.startsWith("+49")) ?
-             (<p style={{ color: 'red' }} >Invalid phone number prefix</p>) : <></>}
-            {mobileNumber && mobileNumber.length !== 12 ?
-             (<p style={{ color: 'red' }} >Invalid phone number</p>) : <></>}
+            <input name='mobileNumber' type='tel' placeholder='+40 or +49 prefix allowed'/>
         </div>
         <div className='form-component'>
             <label>
                 Email
             </label>
-            <input type='email' placeholder='@msggroup.com emails only'
-            value = {email}
-            onChange={(event) => {
-                setEmail(event.target.value)
-            }} 
-            />
-            {/*Some paragraphs showing error messages*/}
-            {email && !email.endsWith("@msggroup.com") ?
-             (<p style={{ color: 'red' }} >Invalid email address</p>) : <></>}
+            <input name='email' type='email' placeholder='@msggroup.com emails only'/>
         </div>
         <div className='form-component '>
             <h3>
@@ -72,36 +33,64 @@ const UserForm = () => {
             <label>
                 Administrator (ADM)
             </label>
-            <input type='checkbox' checked={admRole}
-            onChange={(event) => setAdmRole(event.currentTarget.checked)}/>
+            <input name='admRole' type='checkbox'/>
             </div>
 
             <label>
                 Project manager (PM)
             </label>
-            <input type='checkbox' checked={pmRole}
-            onChange={(event) => setPmRole(event.currentTarget.checked)}/>
+            <input name='pmRole' type='checkbox'/>
             <label>
                 Test manager (TM)
             </label>
-            <input type='checkbox' checked={tmRole}
-            onChange={(event) => setTmRole(event.currentTarget.checked)}/>
+            <input name='tmRole' type='checkbox'/>
             <label>
                 Developer (DEV)
             </label>
-            <input type='checkbox' checked={devRole}
-            onChange={(event) => setDevRole(event.currentTarget.checked)}/>
+            <input name='devRole' type='checkbox'/>
             <label>
                 Tester (TEST)
             </label>
-            <input type='checkbox' checked={testRole}
-            onChange={(event) => setTestRole(event.currentTarget.checked)}/>
+            <input name='testRole' type='checkbox'/>
         </div>
 
-        <input className='form-component btn btn-block' type='submit' value='Create user'/>
-    </form>
+        <button className='form-component btn btn-block'>Create user</button>
+    </Form>
     </div>
   )
+}
+
+export const addUserAction = async({ request }) => {
+
+    const data = await request.formData()
+
+    const submission = {
+        name : data.get("name"),
+        mobileNumber : data.get("mobileNumber"),
+        email : data.get("email"),
+        ADM : data.get("admRole"),
+        PM : data.get("pmRole"),
+        TM : data.get("tmRole"),
+        DEV : data.get("devRole"),
+        TEST : data.get("testRole")
+    }
+
+    const response = await fetch('/api/createUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submission),
+      });
+
+    if(!response.ok){
+        console.log(response.statusText)
+    }
+
+    Navigate("/inspectUsers")
+
+    return redirect("/inspectUsers")
+
 }
 
 export default UserForm
