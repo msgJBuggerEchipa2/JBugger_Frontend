@@ -1,9 +1,60 @@
-.horizontal-list {
-    list-style: none;
-    padding: 0;
-    display: flex; 
-  }
+/* Navigation.css */
+body {
+  background-color: #dfd1ad; /* Set the background color for the entire page */
+  margin: 0; /* Remove default margin to ensure full-width background */
+  font-family: 'Arial', sans-serif; /* Set a common font for the entire page */
+}
+
+nav {
+  background-color: #75b0cb;
+  margin-top: 120px;
+  padding: 10px;
+  border-radius: 15px;
   
-  .horizontal-list li {
-    margin-right: 10px; 
-  }
+  width: 100%;
+  z-index: 1000;
+  height: 40px;
+}
+
+.horizontal-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-list li {
+  margin-right: 10px;
+}
+
+.horizontal-list li:last-child {
+  margin-right: 0;
+}
+
+.horizontal-list a,
+.horizontal-list button {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 12px; /* Add padding for better button appearance */
+  border-radius: 4px; /* Add rounded corners for a modern look */
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.horizontal-list a:hover,
+.horizontal-list button:hover {
+  background-color: #666; /* Darken background on hover */
+}
+
+/* Adjust button styles for consistency */
+.horizontal-list button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Remove text-decoration on hover for buttons */
+.horizontal-list button:hover {
+  text-decoration: none;
+}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Form } from 'react-router-dom'
+import "./UserForm.css"
 
 const UserForm = () => {
     /*Câte un useState pentru fiecare atribut
@@ -98,7 +99,7 @@ const UserForm = () => {
             onChange={(event) => setTestRole(event.currentTarget.checked)}/>
         </div>
 
-        <input className='form-component btn btn-block' type='submit' value='Create user'/>
+        <input className='form-component btn btn-block' type='submit' style={{ textAlign: 'center' }} value='Create user'/>
     </form>
     </div>
   )

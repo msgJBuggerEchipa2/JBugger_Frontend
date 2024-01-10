@@ -1,0 +1,62 @@
+/* UserForm.css */
+
+.container {
+  width: 90%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-component {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-component label {
+  display: block;
+  margin-bottom: 5px;
+  color: #2c3e50; /* Dark gray color for labels */
+  font-size: 16px; /* Adjust font size for labels */
+}
+
+.form-component input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  transition: border-color 0.3s ease;
+  background-color: #f8f8f8;
+}
+
+.form-component-check {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Additional style to add space at the bottom of the form */
+.form-component:last-child {
+  margin-bottom: 20px;
+}

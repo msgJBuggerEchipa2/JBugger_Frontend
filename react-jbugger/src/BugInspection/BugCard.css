@@ -1,0 +1,33 @@
+/* BugCard.css */
+.bugCardContainer {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .bugCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .bugCardHeader h3 {
+    margin: 0;
+  }
+  
+  .bugCardHeader div {
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Style for the icons */
+  .bugCardHeader div svg {
+    cursor: pointer;
+  }
+  
+  /* Additional styling for bug details */
+  p {
+    margin: 8px 0;
+  }
+  

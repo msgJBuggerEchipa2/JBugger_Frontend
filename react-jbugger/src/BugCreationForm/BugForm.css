@@ -1,0 +1,92 @@
+/* BugForm.css */
+/* head{
+  margin-top: 60px;
+} */
+body{
+  margin-top: 120px;
+  padding-top: 60px;
+}
+
+.bug-form-container {
+  width: 80%; /* Adjusted width for better visibility */
+  margin: auto; 
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bug-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between form components */
+  margin-top: 30px; /* Increased margin-top for better spacing */
+}
+
+.form-component {
+  display: flex;
+  flex-direction: column;
+}
+
+.bug-label {
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #2c3e50; /* Dark gray color for labels */
+}
+.bug-textarea {
+  resize: vertical;
+  padding: 12px;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc; /* Add a border for better separation */
+  border-radius: 8px;
+  transition: border-color 0.3s ease; /* Light gray background color */
+}
+
+.bug-input,
+.bug-textarea,
+.bug-select {
+  padding: 14px; /* Increased padding for better input field visibility */
+  font-size: 16px;
+  border: 1px solid #95a5a6; /* Light gray border */
+  border-radius: 8px; /* Increased border-radius for a softer look */
+  margin-top: 10px; /* Adjusted margin-top for better spacing */
+  transition: border-color 0.3s ease; /* Smooth border transition */
+}
+
+.bug-input:focus,
+.bug-textarea:focus,
+.bug-select:focus {
+  outline: none;
+  border-color: #3498db; /* Highlight border on focus */
+}
+
+
+
+.error-message {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #e74c3c; /* Red color for error messages */
+}
+
+.bug-btn {
+  background-color: #588269; /* Green color for buttons */
+  color: white;
+  padding: 14px 20px; /* Adjusted padding for better button size */
+  border: none;
+  border-radius: 8px; /* Increased border-radius for a softer look */
+  cursor: pointer;
+  font-size: 18px;
+  display: flex; 
+  text-align: center;
+  align-items: center; 
+  justify-content: center;
+  transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.bug-btn:hover {
+  background-color: #1d673c; /* Darker green on hover */
+}
+
+.bug-btn-block {
+  width: 100%;
+  margin-top: 20px; /* Adjusted margin-top for better spacing */
+}

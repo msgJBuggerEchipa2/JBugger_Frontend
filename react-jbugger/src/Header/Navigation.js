@@ -21,8 +21,14 @@ const Navigation = ({ onLogout }) => {
           <Link to="/inspectUsers">Inspect Users</Link>
         </li>
         <li>
-          <button onClick={handleLogout}>Logout</button>
+          <Link to="/createBug">Create Bug</Link>
         </li>
+        <li>
+          <Link to="/inspectBugs">Inspect Bug</Link>
+        </li>
+        <li>
+  <a href="#" onClick={handleLogout}>Logout</a>
+</li>
       </ul>
     </nav>
   )

@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.css';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Handle the login logic, e.g., make an API request to the backend
-    console.log('Logging in with:', { username, password });
-    onLogin();
-};
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('/api/auth/login', { username, password });
+      const { user, token } = response.data;
+
+      // Assuming you have a function to handle successful login
+      onLogin(user, token);
+    } catch (error) {
+      console.error('Login failed:', error.response ? error.response.data : error.message);
+    }
+  };
 
   return (
     <div className="login-container">

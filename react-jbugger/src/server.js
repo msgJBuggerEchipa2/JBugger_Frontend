@@ -6,6 +6,7 @@ export function makeServer({ environment = "test" } = {}) {
 
     models: {
       user: Model,
+      bug: Model,
     },
 
     seeds(server) {
@@ -44,17 +45,47 @@ export function makeServer({ environment = "test" } = {}) {
           TM : false,
           DEV : true,
           TEST : true
-      })
+      });
+      server.create("bug", {
+        title: 'Sample Bug',
+        description: 'This is a sample bug',
+        version: '1.0',
+        targetDate: '2022-12-31',
+        severity: 'High',
+        status: 'OPEN',
+        fixedVersion: '',
+      });
     },
 
     routes() {
-      this.namespace = "api"
+      this.namespace = "api";
+
+      this.post("/auth/login", (schema, request) => {
+        const { username, password } = JSON.parse(request.requestBody);
+        const user = schema.users.findBy({ username, password });
+
+        if (user) {
+          return {
+            user: {
+              id: user.id,
+              name: user.name,
+              username: user.username,
+            },
+            token: "your-auth-token", // Replace with your authentication token
+          };
+        } else {
+          return { error: "Invalid username or password" };
+        }
+      });
 
       this.get("/inspectUsers", (schema) => {
-        return schema.users.all()
-      })
+        return schema.users.all();
+      });
+      this.get("/inspectBugs", (schema) => {
+        return schema.bugs.all();
+      });
     },
-  })
+  });
 
-  return server
+  return server;
 }
