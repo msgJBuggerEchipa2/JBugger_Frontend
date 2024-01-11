@@ -5,17 +5,23 @@ import Login from "./LogIn/Login";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loggedUser, setLoggedUser] = useState('');
+  const [tokenUser, setTokenUser] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = (user, token) => {
     setIsAuthenticated(true);
+	setLoggedUser(user);
+	setTokenUser(token);
   };
   const handleLogout = () => {
     setIsAuthenticated(false);
+	setLoggedUser("");
+	setTokenUser("");
   };
 
   return (
     <>
-      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+      <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} user={loggedUser} token={tokenUser} />
       {!isAuthenticated && <Login onLogin={handleLogin} />}
     </>
   );

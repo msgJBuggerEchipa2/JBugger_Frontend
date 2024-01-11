@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form , Navigate} from 'react-router-dom';
 import './BugForm.css';
+import axios from 'axios';
 
-const BugForm = () => {
+const BugForm = ({authToken}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [version, setVersion] = useState('');
@@ -18,6 +19,34 @@ const BugForm = () => {
   const [isValidSeverity, setIsValidSeverity] = useState(true);
   const [isValidFixedVersion, setIsValidFixedVersion] = useState(true);
 
+	const handleBugCreation = async () => {
+	let bug = {
+		"title": title,
+		"description": description,
+		"version": version,
+		"targetDate": targetDate,
+		"severity": severity,
+		"status": status
+	}
+    try {
+      const response = await axios.post('http://localhost:8080/api/bugs/add', bug, {
+    headers: {
+       Authorization: "Bearer " + authToken,
+    }
+	},);
+      
+	  if(response.status){
+		  console.log(bug);
+	  }
+	  if(!response.status){ 
+		console.log(response);
+	  }
+      
+    } catch (error) {
+      console.error('Login failed:', error.response ? error.response.data : error.message);
+    }
+  };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form submitted:', {
@@ -29,6 +58,7 @@ const BugForm = () => {
       status,
       fixedVersion,
     });
+	handleBugCreation();
   };
 
   return (

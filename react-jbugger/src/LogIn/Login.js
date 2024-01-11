@@ -8,11 +8,18 @@ const Login = ({ onLogin }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/api/auth/login', { username, password });
+      const response = await axios.post('http://localhost:8080/auth/login', { username, password });
       const { user, token } = response.data;
-
+      
+	  if(response.status){ 
+	  console.log("Login succesful");
+	  onLogin(user, token);
+	  }
+	  if(!response.status){ 
+	  console.log(response);
+	  }
       // Assuming you have a function to handle successful login
-      onLogin(user, token);
+      
     } catch (error) {
       console.error('Login failed:', error.response ? error.response.data : error.message);
     }

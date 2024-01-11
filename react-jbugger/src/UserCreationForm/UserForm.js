@@ -2,8 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import { Form } from 'react-router-dom'
 import "./UserForm.css"
+import axios from 'axios';
 
-const UserForm = () => {
+const UserForm = ({authToken}) => {
     /*Câte un useState pentru fiecare atribut
     al unui utilizator. Ele vor fi setate, indiferent dacă
     valorile sunt sau nu valide. În schimb se va afișa
@@ -11,6 +12,7 @@ const UserForm = () => {
     const [name, setName] = useState('')
     const [mobileNumber, setMobileNumber] = useState('')
     const [email, setEmail] = useState('')
+	
 
     /*Câte un useState pentru fiecare rol,
     Așa voi ști ce rol va avea noul utilizator*/
@@ -19,11 +21,50 @@ const UserForm = () => {
     const [tmRole, setTmRole] = useState(false)
     const [devRole, setDevRole] = useState(false)
     const [testRole, setTestRole] = useState(false)
+	
+	
+	const handleUserCreation = async (firstN, lastN) => {
+		let user = {
+			"firstName": firstN,
+			"lastName": lastN,
+			"email": email,
+			"mobileNumber" : mobileNumber
+		
+		}
+    try {
+      const response = await axios.post('http://localhost:8080/api/users/add', user, {
+    headers: {
+       Authorization: "Bearer " + authToken,
+    }
+	},);
+      
+	  if(response.status){
+		  console.log(user);
+	  }
+	  if(!response.status){ 
+	  console.log(response);
+	  }
+      
+    } catch (error) {
+      console.error('Login failed:', error.response ? error.response.data : error.message);
+    }
+  };
+	
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Form submitted:', {
+      name,
+      email,
+      mobileNumber,
+    });
+	const namesArr = name.split(" ");
+	handleUserCreation(namesArr[0], namesArr[1]);
+  };
 
 
   return (
     <div className="container">
-    <form className='add-user-form' method='post' action='/inspectUsers'>
+    <form className='add-user-form' onSubmit={handleSubmit}>
         <div className='form-component'>
             <label>
                 Name
